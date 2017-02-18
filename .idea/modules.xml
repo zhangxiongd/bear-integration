@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-integration/api-integration.iml" filepath="$PROJECT_DIR$/api-integration/api-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bear-integration.iml" filepath="$PROJECT_DIR$/bear-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-integration/common-integration.iml" filepath="$PROJECT_DIR$/common-integration/common-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/console-integration/console-integration.iml" filepath="$PROJECT_DIR$/console-integration/console-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model-integration/model-integration.iml" filepath="$PROJECT_DIR$/model-integration/model-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-integration/service-integration.iml" filepath="$PROJECT_DIR$/service-integration/service-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webApi-integration/webApi-integration.iml" filepath="$PROJECT_DIR$/webApi-integration/webApi-integration.iml" />
+    </modules>
+  </component>
+</project>

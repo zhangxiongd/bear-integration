@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webApi-integration:war">
+    <output-path>$PROJECT_DIR$/webApi-integration/target</output-path>
+    <root id="archive" name="webApi-integration-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="webApi-integration:war exploded" />
+    </root>
+  </artifact>
+</component>
