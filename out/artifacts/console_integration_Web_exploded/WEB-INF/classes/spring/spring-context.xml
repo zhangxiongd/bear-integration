@@ -13,6 +13,8 @@
     <!--引入其他配置资源-->
     <import resource="classpath:spring/spring-mvc.xml"/>
     <import resource="classpath:spring/spring-dao.xml"/>
+    <import resource="classpath:spring/spring-shiro.xml"/>
+
     <!--<import resource="classpath:spring/spring-rabbit.xml"/>-->
     <!--<import resource="classpath:spring/spring-redis.xml"/>-->
     <!--aop-->

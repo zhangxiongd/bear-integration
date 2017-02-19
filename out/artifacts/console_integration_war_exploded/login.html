@@ -3,8 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            background-color: #d2d6de;
+            font-size: 14px;
+        }
+
+        .login_box {
+            width: 360px;
+            height: 422px;
+            margin: 7% auto;
+        }
+
+        .login_logo {
+            height: 50px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 300px;
+            font-size: 35px;
+            color: #666;
+
+        }
+
+        .login_body {
+            height: 347px;
+            padding: 20px;
+            background-color: #FFF;
+
+        }
+
+        .login_body p {
+            text-align: center;
+            padding: 0 20px 20px 20px;
+        }
+
+        .form_control {
+            width: 340px;
+            height: 34px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form_control input {
+            display: block;
+            height: 34px;
+            width: 320px;
+            border-color: 1px solid #CCC;
+            padding: 6px 42.5px 6px 12px;
+            background-color: #FFF;
+            margin: 5px;
+            line-height: 14px;
+            color: #555;
+            box-sizing: border-box;
+
+        }
+
+        .form_control .form_fonts {
+            color: #777;
+            position: absolute;
+            right: 26px;
+            top: 9px;
+
+        }
+
+        .form_group {
+            width: 320px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+        .form_group img {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+        }
+
+        .form_group a {
+            text-decoration: none;
+            padding-left: 25px;
+        }
+
+        .row {
+            height: 55px;
+            border-top: 1px solid #DDD;
+            padding: 20px 2px 0px 2px;
+            padding-left: 250px;
+
+        }
+
+        .row button {
+            background-color: #367fa9;
+            width: 76px;
+            height: 34px;
+            color: #FFF;
+        }
+
+        .row button:hover {
+            border-color: #367fa9
+
+        }
+
+    </style>
 </head>
 <body>
-<h1>Hello world</h1>
+<div id="loginApp" class="login_box">
+    <div class="login_logo">
+        <b>人人权限系统</b>
+    </div>
+    <div class="login_body">
+        <p>管理员登录</p>
+        <form>
+            <div class="form_control">
+                <input class="" type="text" placeholder="账号" v-model="account">
+                <span class="glyphicon glyphicon-user form_fonts" aria-hidden="true"></span>
+            </div>
+            <div class="form_control">
+                <input type="password" placeholder="密码" v-model="password">
+                <span class="glyphicon glyphicon-lock form_fonts" aria-hidden="true"></span>
+            </div>
+            <div class="form_control">
+                <input type="text" placeholder="验证码" v-model="code">
+                <span class="glyphicon glyphicon-warning-sign form_fonts" aria-hidden="true"></span>
+            </div>
+            <div class="form_group">
+                <img :src="src">
+                <a href="#" @click="refreshCode">点击刷新</a>
+            </div>
+            <div class="row">
+                <button @click="login">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
+<script type="text/javascript" src="static/js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="static/js/vue.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: '#loginApp',
+        data: {
+            src: '/login/captcha.jpg',
+            account: '',
+            password: '',
+            code: ''
+
+        },
+        methods: {
+            refreshCode: function () {
+                this.src = '/login/captcha.jpg' + $.now();
+            },
+            login: function () {
+                return
+                var data = {
+                    account: 'this.account',
+                    password: 'this.password',
+                    code: 'this.code'
+                }
+                $.ajax({
+                    url: '',
+                    data: data,
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: ' application/json',
+                    success: function (result) {
+                        alert('提交成功！')
+                    },
+                    error: function () {
+                        alert('提交失败！')
+                    }
+                })
+
+            }
+
+        },
+        created: function () {
+
+        },
+        computed: {}
+    })
+</script>
 </html>
