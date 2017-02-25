@@ -6,59 +6,53 @@
 </head>
 <body>
 	<div>
-		
-	</div>
-    <!-- <h4 class="sub-header"> -->
-    <div>
-
-
-        <form class="form-horizontal">
-			<div class="form-group">
-			    <label for="exampleInputName2" class="col-sm-1 control-label">用户名</label>
-			    <div class="col-sm-3">
-			      <input type="text" class="form-control" id="exampleInputName2" placeholder="用户名">
-			    </div>
-			    <label for="inputEmail3" class="col-sm-2 control-label">手机号</label>
-			    <div class="col-sm-3">
-			      <input type="text" class="form-control" id="inputEmail3" placeholder="手机号">
-			    </div>
-			</div>
-			<div>
-				<button type="button" class="btn btn-default "><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
-				<button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
-				<button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改</button>
-				<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
-			</div>
-        </form>
-    </div>
-    <!-- </h4> -->
-	<div class="table-responsive">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-				  <th>#</th>
-				  <th>选项</th>
-				  <th>用户ID</th>
-				  <th>用户名</th>
-				  <th>邮箱</th>
-				  <th>手机号</th>
-				  <th>状态</th>
-				  <th>创建时间</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-				  <td>1</td>
-				  <td><input type="checkbox"></td>
-				  <td>Admin</td>
-				  <td>Admin</td>
-				  <td>admin@admin.com</td>
-				  <td>13944657846</td>
-				  <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td>
-				  <td>2017-02-24 17:01:05</td>
-				</tr>
-			</tbody>
-		</table>
+		<div>
+	        <form class="form-horizontal">
+				<div class="form-group">
+				    <label for="exampleInputName2" class="col-sm-1 control-label">用户名</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="exampleInputName2" placeholder="用户名">
+				    </div>
+				    <label for="inputEmail3" class="col-sm-2 control-label">手机号</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="手机号">
+				    </div>
+				</div>
+				<div class="col-sm-8 control-label">
+					<button type="button" class="btn btn-success "><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
+					<button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
+					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
+				</div>
+	        </form>
+	    </div>
+		<div class="table-responsive col-sm-12 control-label" style="margin-top: 20px">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th>#</th>
+					  <th>选项</th>
+					  <th>用户ID</th>
+					  <th>用户名</th>
+					  <th>邮箱</th>
+					  <th>手机号</th>
+					  <th>状态</th>
+					  <th>创建时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					  <td>1</td>
+					  <td><input type="checkbox"></td>
+					  <td>Admin</td>
+					  <td>Admin</td>
+					  <td>admin@admin.com</td>
+					  <td>13944657846</td>
+					  <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td>
+					  <td>2017-02-24 17:01:05</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 </body>

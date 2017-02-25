@@ -143,10 +143,10 @@
 <script type="text/javascript" src="static/js/vue.js"></script>
 <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    var vue = new Vue({
+    var loginVm = new Vue({
         el: '#loginApp',
         data: {
-            src: '/login/captcha.jpg',
+            src: 'account/captcha.jpg',
             account: '',
             password: '',
             code: ''
@@ -154,7 +154,7 @@
         },
         methods: {
             refreshCode: function () {
-                this.src = '/login/captcha.jpg?t=' + $.now();
+                this.src = 'account/captcha.jpg?t=' + $.now();
             },
             login: function () {
                 if (this.account.trim() && this.password.trim() && this.code.trim()) {
@@ -164,7 +164,7 @@
                         'captcha':this.code
                     };
                     $.ajax({
-                        url: 'login/account',
+                        url: 'account/login',
                         data:JSON.stringify(data),
                         type: 'post',
                         dataType: 'json',
@@ -173,11 +173,13 @@
                             if(result.success){
                                 document.location.href = 'index.html'
                             }else{
+                                loginVm.refreshCode();
                                 alert(result.resultMsg)
                             }
 
                         },
                         error: function () {
+                            loginVm.refreshCode();
                             alert('网络异常！')
                         }
                     })
