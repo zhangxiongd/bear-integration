@@ -35,7 +35,7 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-					  <th>id</th>
+					  <th></th>
 					  <th>用户名</th>
 					  <th>手机号</th>
 					  <th>真名</th>
@@ -79,13 +79,13 @@
 		},
 		methods:{
 			query:function(){
-				if(!(this.accountName.trim() || this.mobile.trim())){
-					this.warnMsg = true;
-					setTimeout(function(){
-						userVm.warnMsg = false;
-					},2000)
-					return;
-				}
+				// if(!(this.accountName.trim() || this.mobile.trim())){
+				// 	this.warnMsg = true;
+				// 	setTimeout(function(){
+				// 		userVm.warnMsg = false;
+				// 	},2000)
+				// 	return;
+				// }
 				if(this.accountName.trim() || this.mobile.trim()){
 					var data = {
 						'accountName':this.accountName,

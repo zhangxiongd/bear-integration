@@ -155,6 +155,8 @@
         methods: {
             refreshCode: function () {
                 this.src = 'account/captcha.jpg?t=' + $.now();
+                this.code = '';
+
             },
             login: function () {
                 if (this.account.trim() && this.password.trim() && this.code.trim()) {
