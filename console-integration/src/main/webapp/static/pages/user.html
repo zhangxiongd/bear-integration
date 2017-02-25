@@ -46,46 +46,6 @@
 					  <th>正常</th>
 					</tr>
 				</thead>
-<!-- result:
-	备注:  gender： 性别	0 :女 ,1:男
-		   isAdmin: 是否是系统管理员 0:不是， 1:是
-		   isDelete: 是否正常 0: 正常, 1:不正常
-	{
-    "resultCode": "SUCCESS",
-    "resultData": 
-    	[
-    		{
-		        'id':1
-		         'accountName':"zhangxiong "
-		         'mobile':"18201716022"
-		         'realName':'张雄'
-		         'email':"123@12.com "
-		         'gender':"1"
-		         'provinceName':"湖南省"
-		         'cityName':"长沙市"
-		         'districtName':"岳麓区"
-		         'isAdmin':"1"
-		         'isDelete':"0"
-	     	},
-	     	{
-		        'id':1
-		         'accountName':"zhangxiong "
-		         'mobile':"18201716022"
-		         'realName':'张雄'
-		         'email':"123@12.com "
-		         'gender':"1"
-		         'provinceName':"湖南省"
-		         'cityName':"长沙市"
-		         'districtName':"岳麓区"
-		         'isAdmin':"1"
-		         'isDelete':"0"
-	     	}
-    	]
-        
-     
-    "resultMsg": "操作成功",
-    "success": true
-} -->
 				<tbody v-for="item in items">
 					<tr>
 					  <td><input type="checkbox">{{item.id}}</td>
@@ -97,8 +57,7 @@
 					  <td>{{item.provinceName+item.cityName+item.districtName}}</td>
 					  <td>{{item.isAdmin}}</td>
 					  <td>{{item.isDelete}}</td>
-					  <!-- <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td>
-					  <td>2017-02-24 17:01:05</td> -->
+					 <!--  <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td> -->
 					</tr>
 				</tbody>
 			</table>
@@ -133,9 +92,9 @@
 						'mobile':this.mobile
 					}
 					$.ajax({
-						url:'user/list?accountName='+this.accountName +'&mobile='+this.mobile,
+						url:'user/list',
 						data:JSON.stringify(data),
-						type:'get',
+						type:'post',
 						dataType:'json',
 						contentType:'application/json',
 						success:function(result){
