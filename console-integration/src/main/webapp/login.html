@@ -158,13 +158,18 @@
             },
             login: function () {
                 if (this.account.trim() && this.password.trim() && this.code.trim()) {
+                    var data = {
+                        accountName:'this.account',
+                        password:'this.password',
+                        captcha:'this.code'
+                    };
                     $.ajax({
-                        url: '/login/login?accountName=' + this.account + '&password=' + this.password + '&captcha=' + this.code,
-                        type: 'get',
+                        url: 'login/account',
+                        type: 'post',
                         dataType: 'json',
                         contentType: ' application/json',
                         success: function (result) {
-                            ducment.location.href = 'index.html'
+                            document.location.href = 'index.html'
 
                         },
                         error: function () {
