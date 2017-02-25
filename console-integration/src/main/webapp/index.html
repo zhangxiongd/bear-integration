@@ -333,10 +333,10 @@
 
 
         },
-        created: function () {
+        updated : function () {
           $.ajax({
-            url:'',
-            data:'null',
+            url:'user/getUserInfo',
+            data:null,
             type:'get',
             dataType:'json',
             contentType:'application/json',
