@@ -170,11 +170,15 @@
                         dataType: 'json',
                         contentType: 'application/json',
                         success: function (result) {
-                            document.location.href = 'index.html'
+                            if(result.success){
+                                document.location.href = 'index.html'
+                            }else{
+                                alert(result.resultMsg)
+                            }
 
                         },
                         error: function () {
-                            alert('登入失败！')
+                            alert('网络异常！')
                         }
                     })
                 } else {
