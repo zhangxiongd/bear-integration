@@ -133,7 +133,7 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;欢迎&nbsp;{{accountName}}</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;欢迎&nbsp;{{accountName}}</a></li>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#myModal">&nbsp;
                             <span class="glyphicon glyphicon-lock" aria-hidden="true">
@@ -278,7 +278,7 @@
     })
 
 
-    var vue = new Vue({
+    var indexVm = new Vue({
         el: '#indexApp',
         data: {
             accountName:'',
@@ -333,7 +333,7 @@
 
 
         },
-        updated : function () {
+        mounted : function () {
           $.ajax({
             url:'user/getUserInfo',
             data:null,
@@ -342,7 +342,8 @@
             contentType:'application/json',
             success:function(result){
               if(result.resultCode == 'SUCCESS'){
-                  this.accountName = result.resultData.accountName;
+                console.log(this)
+                  indexVm.accountName = result.resultData.accountName;
               }
             }
           })
