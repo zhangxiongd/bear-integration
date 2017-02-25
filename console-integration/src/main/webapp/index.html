@@ -209,7 +209,7 @@
                         <li>
                             <a class="click_menu" href="#">系统管理</a>
                             <ul class="nav nav-sidebar nav_menu" style="display:block">
-                                <li><a href="http://www.zhi-you.net/" target="main">用户管理</a></li>
+                                <li><a href="../static/pages/user.html" target="user">用户管理</a></li>
                                 <li><a href="" target="">角色管理</a></li>
                                 <li><a href="" target="">菜单管理</a></li>
                             </ul>
@@ -238,10 +238,10 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <section class="content">
                         <div class="embed-responsive embed-responsive-16by9 ">
-                          <iframe class="embed-responsive-item right_content"   name="main" ></iframe>
+                          <iframe class="embed-responsive-item right_content"
+                          name="user"></iframe>
                         </div>
                     </section>
-                  
                 </div>
             </div>
         </div>
@@ -334,13 +334,13 @@
 
         },
         created: function () {
-          ajax({
+          $.ajax({
             url:'',
             data:'null',
             type:'get',
             dataType:'json',
             contentType:'application/json',
-            success：function(result){
+            success:function(result){
               if(result.resultCode == 'SUCCESS'){
                   this.accountName = result.resultData.accountName;
               }
