@@ -56,6 +56,7 @@
             margin-top: 25px;
             z-index: 1;
             background-color: #eee;
+            margin-left: 0px;
         }
         .code_nav a{
             color: #666;
@@ -132,7 +133,7 @@
 
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;用户名</a></li>
+                    <li><a href="../navbar/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;欢迎&nbsp;{{accountName}}</a></li>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#myModal">&nbsp;
                             <span class="glyphicon glyphicon-lock" aria-hidden="true">
@@ -195,7 +196,7 @@
             <div class="code_nav">
                 <ol class="breadcrumb">
                   <li>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home" aria-hidden="true"><a href="#">&nbsp;首页</a></li>
-                  <li><a href="#">管理员列表</a></li>
+                  <li>管理员列表</li>
                   <li class="active">其他</li>
                 </ol>
             </div> 
@@ -320,6 +321,7 @@
     var vue = new Vue({
         el: '#indexApp',
         data: {
+            accountName:'',
             oldPsd:'',
             newPsd:'',
             sureNewPsd:''
@@ -359,7 +361,7 @@
                     dataType:'json',
                     contentType:'application/json',
                     success:function(result){
-                        confirm('亲爱的,确定退出此系统?')
+                        confirm('亲爱的'+result.resultData.accountName+',确定退出此系统?')
 
                     },
                     error:function(){
@@ -372,8 +374,18 @@
 
         },
         created: function () {
-
-            
+          ajax({
+            url:'',
+            data:'null',
+            type:'get',
+            dataType:'json',
+            contentType:'application/json',
+            success：function(result){
+              if(result.resultCode == 'SUCCESS'){
+                  this.accountName = result.resultData.accountName;
+              }
+            }
+          })
         },
         computed: {
 

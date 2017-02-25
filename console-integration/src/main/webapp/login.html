@@ -159,16 +159,16 @@
             login: function () {
                 if (this.account.trim() && this.password.trim() && this.code.trim()) {
                     var data = {
-                        accountName:this.account,
-                        password:this.password,
-                        captcha:this.code
+                        'accountName':this.account,
+                        'password':this.password,
+                        'captcha':this.code
                     };
                     $.ajax({
                         url: 'login/account',
-                        data:data,
+                        data:Json.Stringify(data),
                         type: 'post',
                         dataType: 'json',
-                        contentType: ' application/json',
+                        contentType: 'application/json',
                         success: function (result) {
                             document.location.href = 'index.html'
 
