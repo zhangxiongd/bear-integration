@@ -3,23 +3,29 @@
 <head>
 	<title>用户管理</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <style type="text/css">
+    	.warnMsg{
+    		color: red;
+    	}
+    </style>
 </head>
 <body>
-	<div>
+	<div id="userVm">
 		<div>
 	        <form class="form-horizontal">
 				<div class="form-group">
-				    <label for="exampleInputName2" class="col-sm-1 control-label">用户名</label>
+				    <label for="inputName" class="col-sm-1 control-label">用户名</label>
 				    <div class="col-sm-3">
-				      <input type="text" class="form-control" id="exampleInputName2" placeholder="用户名">
+				      <input type="text" class="form-control" id="inputName" placeholder="用户名" v-model="accountName">
 				    </div>
-				    <label for="inputEmail3" class="col-sm-2 control-label">手机号</label>
+				    <label for="inputMobile" class="col-sm-2 control-label">手机号</label>
 				    <div class="col-sm-3">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="手机号">
+				      <input type="text" class="form-control" id="inputMobile" placeholder="手机号" v-model="mobile">
 				    </div>
 				</div>
 				<div class="col-sm-8 control-label">
-					<button type="button" class="btn btn-success "><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
+					<span class="warnMsg" v-if="warnMsg">用户名和手机请必填一项</span>
+ 					<button type="button" class="btn btn-success " @click="query"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
 					<button type="button" class="btn btn-primary "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
 					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
 				</div>
@@ -29,26 +35,70 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-					  <th>#</th>
-					  <th>选项</th>
-					  <th>用户ID</th>
+					  <th>id</th>
 					  <th>用户名</th>
-					  <th>邮箱</th>
 					  <th>手机号</th>
-					  <th>状态</th>
-					  <th>创建时间</th>
+					  <th>真名</th>
+					  <th>邮箱</th>
+					  <th>性别</th>
+					  <th>地址</th>
+					  <th>管理员</th>
+					  <th>正常</th>
 					</tr>
 				</thead>
-				<tbody>
+<!-- result:
+	备注:  gender： 性别	0 :女 ,1:男
+		   isAdmin: 是否是系统管理员 0:不是， 1:是
+		   isDelete: 是否正常 0: 正常, 1:不正常
+	{
+    "resultCode": "SUCCESS",
+    "resultData": 
+    	[
+    		{
+		        'id':1
+		         'accountName':"zhangxiong "
+		         'mobile':"18201716022"
+		         'realName':'张雄'
+		         'email':"123@12.com "
+		         'gender':"1"
+		         'provinceName':"湖南省"
+		         'cityName':"长沙市"
+		         'districtName':"岳麓区"
+		         'isAdmin':"1"
+		         'isDelete':"0"
+	     	},
+	     	{
+		        'id':1
+		         'accountName':"zhangxiong "
+		         'mobile':"18201716022"
+		         'realName':'张雄'
+		         'email':"123@12.com "
+		         'gender':"1"
+		         'provinceName':"湖南省"
+		         'cityName':"长沙市"
+		         'districtName':"岳麓区"
+		         'isAdmin':"1"
+		         'isDelete':"0"
+	     	}
+    	]
+        
+     
+    "resultMsg": "操作成功",
+    "success": true
+} -->
+				<tbody v-for="item in items">
 					<tr>
-					  <td>1</td>
-					  <td><input type="checkbox"></td>
-					  <td>Admin</td>
-					  <td>Admin</td>
-					  <td>admin@admin.com</td>
-					  <td>13944657846</td>
-					  <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td>
-					  <td>2017-02-24 17:01:05</td>
+					  <td><input type="checkbox">{{item.id}}</td>
+					  <td>{{item.accountName}}</td>
+					  <td>{{item.mobile}}</td>
+					  <td>{{item.realName}}</td>
+					  <td>{{item.email}}</td>
+					  <td>{{item.gender}}</td>
+					  <td>{{item.provinceName+item.cityName+item.districtName}}</td>
+					  <td>{{item.isAdmin}}</td>
+					  <td>{{item.isDelete}}</td>
+					  <!-- <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td>
+					  <td>2017-02-24 17:01:05</td> -->
 					</tr>
 				</tbody>
 			</table>
@@ -59,4 +109,53 @@
 <script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	var userVm = new Vue({
+		el:'#userVm',
+		data:{
+			accountName:'',
+			mobile:'',
+			warnMsg:false,
+			items:[]
+		},
+		methods:{
+			query:function(){
+				if(!(this.accountName.trim() || this.mobile.trim())){
+					this.warnMsg = true;
+					setTimeout(function(){
+						userVm.warnMsg = false;
+					},2000)
+					return;
+				}
+				if(this.accountName.trim() || this.mobile.trim()){
+					var data = {
+						'accountName':this.accountName,
+						'mobile':this.mobile
+					}
+					$.ajax({
+						url:'user/list?accountName='+this.accountName +'&mobile='+this.mobile,
+						data:JSON.stringify(data),
+						type:'get',
+						dataType:'json',
+						contentType:'application/json',
+						success:function(result){
+							if(result.success){
+								userVm.items = result.resultData
+							}else{
+								alert(result.resultMsg)
+							}
+						},
+						error:function(){
+							alert('网络异常！')
+						}
+					})
+				}
+
+
+
+			}
+		}
+	})
+	
+</script>
 </html>
