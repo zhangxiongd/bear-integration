@@ -125,7 +125,7 @@
 </head>
 <body>
     <div id="indexApp">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="#">人人权限系统</a>
@@ -306,9 +306,8 @@
                         dataType:'json',
                         contentType:'application/json',
                         success:function(result){
-                            if(confirm('修改成功，确认登入！')){
-                                document.location.href = "login.html"
-                            }
+                            alert('修改成功，请重新登录！');
+                            document.location.href = "login.html"
                         },
                         error:function(){
                             alert('修改失败！')
