@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywordys" content="人人权限系统, 管理系统">
+    <meta name="description" content="index.html">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <style type="text/css">
+
+        /* Move down content because we have a fixed navbar that is 50px tall */
+        body {
+          padding-top: 80px;
+        }
+
+
+        /*
+         * Global add-ons
+         */
+
+        .sub-header {
+          padding-bottom: 10px;
+          border-bottom: 1px solid #eee;
+        }
+
+        /*
+         * Top navigation
+         * Hide default border to remove 1px line.
+         */
+        .navbar-fixed-top {
+          border: 0;
+        }
+    
+        .navbar{
+            background-color: #428bca;
+            color:#222;
+            margin-bottom: 20px;
+
+        }
+        .navbar-default .navbar-nav>li>a,
+        .navbar-header .navbar-brand,
+        .navbar-default .navbar-nav>.active>a,
+        .navbar-default .navbar-nav>.active>a:hover,
+        .navbar-default .navbar-nav>.active>a:focus{
+            color:#FFF;
+
+        }
+         @media (min-width:768px){
+            .breadcrumb{
+                 margin-bottom: 0px;
+                 padding-left: 226px;
+            }
+         }
+
+        .code_nav{
+            margin-top: 25px;
+            z-index: 1;
+            background-color: #eee;
+            margin-left: 0px;
+        }
+        .code_nav a{
+            color: #666;
+        }
+        .sidebar {
+          display: none;
+        }
+        @media (min-width: 768px) {
+          .sidebar {
+            position: fixed;
+            top: 50px;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            display: block;
+            padding:0px 20px 20px 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+            border-right: 1px solid #eee;
+          }
+        }
+
+        /* Sidebar navigation */
+        .nav-sidebar {
+          margin-right: -21px; /* 20px padding + 1px border */
+          margin-bottom: 20px;
+          margin-left: -20px;
+        }
+        .nav-sidebar > li > a {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+        .nav-sidebar > .active > a,
+        .nav-sidebar > .active > a:hover,
+        .nav-sidebar > .active > a:focus {
+          color: #fff;
+          background-color: #428bca;
+        }
+        .side_nav ul li ul{
+             display: none;
+        }
+        .side_nav ul li a:hover{
+            background-color: #428bca;
+            color: #FFF;
+            text-decoration: none;
+        }
+        .side_nav ul li ul{
+             text-indent: 40px;
+             display: none;
+        }
+        .main {
+          padding: 20px;
+        }
+        @media (min-width: 768px) {
+          .main {
+            padding-right: 40px;
+            padding-left: 40px;
+          }
+        }
+        .main .page-header {
+          margin-top: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="indexApp">
+        <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">人人权限系统</a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;欢迎&nbsp;{{accountName}}</a></li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#myModal">&nbsp;
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true">
+                            </span>
+                            &nbsp;修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" @click="loginOut">
+                            &nbsp;
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true">
+                            </span>
+                            &nbsp;退出系统
+                        </a>
+                    </li>
+              </ul>
+            </div>
+            <!-- 修改密码模态 -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">修改密码</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">账号</label>
+                            <span  class="form-control">admin</span>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <label for="psd" class="control-label">原密码</label>
+                                <input type="password" class="form-control" id="oldPsd" v-model="oldPsd">
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPsd" class="control-label">新密码</label>
+                            <input type="password" class="form-control" id="newPsd" v-model="newPsd">
+                        </div>
+                         <div class="form-group">
+                            <label for="newPsd" class="control-label">确认新密码</label>
+                            <input type="password" class="form-control" id="sureNewPsd" v-model="sureNewPsd">
+                        </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @click="modifyPsd">修改</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </nav>
+        <nav class="code_nav navbar-fixed-top">
+            <div class="code_nav">
+                <ol class="breadcrumb">
+                  <li>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home" aria-hidden="true"><a href="#">&nbsp;首页</a></li>
+                  <li>管理员列表</li>
+                  <li class="active">其他</li>
+                </ol>
+            </div> 
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar side_nav">
+                      <ul class="nav nav-sidebar ">
+                        <li class="active"><a href="#" style="background:#222">导航菜单</a></li>
+                        <li>
+                            <a class="click_menu" href="#">系统管理</a>
+                            <ul class="nav nav-sidebar nav_menu" style="display:block">
+                                <li><a href="../static/pages/user.html" target="user">用户管理</a></li>
+                                <li><a href="" target="">角色管理</a></li>
+                                <li><a href="" target="">菜单管理</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="click_menu" href="#">订单管理</a>
+                            <ul class="nav nav-sidebar">
+                                <li><a href="">订单列表</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a class="click_menu" href="#">客户管理</a>
+                            <ul class="nav nav-sidebar">
+                                <li><a href="">客户列表</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="click_menu" href="#">物流管理</a>
+                            <ul class="nav nav-sidebar">
+                                <li><a href="">物流列表</a></li>
+                            </ul>
+                        </li>
+                      </ul>
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <section class="content">
+                        <div class="embed-responsive embed-responsive-16by9 ">
+                          <iframe class="embed-responsive-item right_content"
+                          name="user"></iframe>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script type="text/javascript" src="static/js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="static/js/vue.js"></script>
+<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var last ;
+        $('.click_menu').click(function(){
+
+            // if(!last){
+            //     nav_menu
+            // }
+
+            if(last == this && $(this).next().css('display') === 'block'){
+                $(this).next().slideUp();
+                return;
+            }
+            if(last){
+                $(last).next().slideUp();
+            }
+            if($(this).next().css('display') === 'block'){
+                $(this).next().slideUp();
+            }else{
+                $(this).next().slideDown();
+            }
+
+            last = this;
+        })
+    })
+
+
+    var indexVm = new Vue({
+        el: '#indexApp',
+        data: {
+            accountName:'',
+            oldPsd:'',
+            newPsd:'',
+            sureNewPsd:''
+
+        },
+        methods: {
+            modifyPsd:function(){
+                if(this.oldPsd.trim()&&this.newPsd.trim()&&this.sureNewPsd.trim()){
+                    if(this.newPsd!=this.sureNewPsd){
+                        alert('新输入密码与确认密码不相同，请确认新密码！')
+                        return;
+                    };
+                   var data = {
+                        'accountName':this.accountName,
+                        'oldPwd':this.oldPsd,
+                        'newPwd':this.newPsd
+                    };
+                   $.ajax({
+                        url:'user/modifyPwd',
+                        data:JSON.stringify(data),
+                        type:'post',
+                        dataType:'json',
+                        contentType:'application/json',
+                        success:function(result){
+                            alert('修改成功，请重新登录！');
+                            document.location.href = "login.html"
+                        },
+                        error:function(){
+                            alert('修改失败！')
+                        }
+                   })
+                }else{
+                    alert('输入不合法，请重新输入！')
+                }
+            },
+            loginOut:function(){
+                if(confirm('亲爱的'+this.accountName+',确定退出此系统?')){
+                    $.ajax({
+                        url:'account/loginOut',
+                        type:'get',
+                        dataType:'json',
+                        contentType:'application/json',
+                        success:function(result){
+                            document.location.href = 'login.html';
+
+                        },
+                        error:function(){
+                            alert('网络异常！')
+                        }
+                    })
+                }
+              
+            }
+
+
+
+        },
+        mounted : function () {
+          $.ajax({
+            url:'user/getUserInfo',
+            data:null,
+            type:'get',
+            dataType:'json',
+            contentType:'application/json',
+            success:function(result){
+              if(result.resultCode == 'SUCCESS'){
+                  indexVm.accountName = result.resultData.accountName;
+              }
+            }
+          })
+        },
+        computed: {
+
+        }
+    })
+</script>
+</html>

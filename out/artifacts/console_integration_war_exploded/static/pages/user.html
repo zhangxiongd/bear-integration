@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <style type="text/css">
+    	.warnMsg{
+    		color: red;
+    	}
+    </style>
+</head>
+<body>
+	<div id="userVm" v-cloak>
+		<div>
+	        <form class="form-horizontal">
+				<div class="form-group">
+				    <label for="inputName" class="col-sm-1 control-label">用户名</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="inputName" placeholder="用户名" v-model="accountName">
+				    </div>
+				    <label for="inputMobile" class="col-sm-2 control-label">手机号</label>
+				    <div class="col-sm-3">
+				      <input type="text" class="form-control" id="inputMobile" placeholder="手机号" v-model="mobile">
+				    </div>
+				</div>
+				<div class="col-sm-8 control-label">
+					<span class="warnMsg" v-if="warnMsg">用户名和手机请必填一项</span>
+ 					<button type="button" class="btn btn-success " @click="query"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
+					<button type="button" class="btn btn-primary" @click="showCreateModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
+					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
+				</div>
+	        </form>
+	    </div>
+	    <!-- 新增模态框 -->
+		<div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="gridSystemModalLabel">新增用户</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form  class="form-horizontal">
+		            <div class="form-group">
+		                <label for="" class="col-sm-2 control-label">账号名</label>
+		                <div class="col-sm-10">
+		                	<input type="text" class="form-control" id="" v-model="createUser.accountName">
+		                </div>
+		            </div>
+		            <div class="form-group">
+	                    <label for="" class="col-sm-2 control-label">手机号</label>
+		                <div class="col-sm-10">
+	                    	<input type="" class="form-control" id="" v-model="createUser.mobile">
+	                    </div>
+		            </div>
+		            <div class="form-group">
+	                    <label for="" class="col-sm-2 control-label">邮箱地址</label>
+		                <div class="col-sm-10">
+	                    	<input type="" class="form-control" id="" v-model="createUser.email" >
+	                    </div>
+		            </div>
+		            <div class="form-group">
+	                    <label for="" class="col-sm-2 control-label">性别</label>
+		                <div class="col-sm-10">
+	                    	<input type="" class="form-control" id="" v-model="createUser.gender">
+	                    </div>
+		            </div>
+		            <div class="form-group">
+	                    <label for="" class="col-sm-2 control-label">地址</label>
+		                <div class="col-sm-10">
+	                    	<select v-model="createUser.selectedProvince" @change="provinceChange">
+	                    		<option v-for="item in provinceList" :value="{provinceId:item.provinceId,provinceName:item.provinceName}" >{{item.provinceName}}</option>
+	                    	</select>
+	                    	<select v-model="createUser.selectedCity" @change="cityChange">
+	                    		<option v-for="item in cityList" :value="{cityName:item.cityName,cityId:item.cityId}">{{item.cityName}}</option>
+	                    	</select>
+	                    	<select v-model="createUser.selectedDistrict"> 
+	                    		<option v-for="item in districtList" :value="{districtName:item.districtName,districtId:item.districtId}">{{item.districtName}}</option>
+	                    	</select>
+	                    </div>
+		            </div>
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary"  @click="createUser">新增</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="table-responsive col-sm-12 control-label" style="margin-top: 20px">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th></th>
+					  <th>用户名</th>
+					  <th>手机号</th>
+					  <th>真实姓名</th>
+					  <th>邮箱</th>
+					  <th>性别</th>
+					  <th>地址</th>
+					  <th>管理员</th>
+					  <th>正常</th>
+					</tr>
+				</thead>
+				<tbody v-for="item in items">
+					<tr>
+					  <td><input type="checkbox">{{item.id}}</td>
+					  <td>{{item.accountName}}</td>
+					  <td>{{item.mobile}}</td>
+					  <td>{{item.realName}}</td>
+					  <td>{{item.email}}</td>
+					  <td>{{item.gender===0 ? "女":"男"}}</td>
+					  <td>{{item.provinceName+item.cityName+item.districtName}}</td>
+					  <td>{{item.isAdmin===0 ? "否":"是" }}</td>
+					  <td>{{item.isDelete | isDeleteFilter}}</td>
+					 <!--  <td><span  class="badge" style="background: #5cb85c">正常</span><span  class="badge" style="background: #d9534f">禁用</span></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	var userVm = new Vue({
+		el:'#userVm',
+		data:{
+			accountName:'',
+			mobile:'',
+			warnMsg:false,
+			items:[],
+			createUser:{
+				accountName:'',
+				mobile:'',
+				email:'',
+				gender:'',
+				selectedProvince:{provinceName:'请选择',provinceId:''},
+				selectedCity:{cityName:'请选择',cityId:''},
+				selectedDistrict:{districtName:'请选择',districtcityId:''}
+
+			},
+			provinceList:[],
+			cityList:[{cityName:'请选择',cityId:''}],
+			districtList:[{districtName:'请选择',districtcityId:''}]
+
+		},
+		methods:{
+			query:function(){
+				var data = {
+					'accountName':this.accountName,
+					'mobile':this.mobile
+				}
+				$.ajax({
+					url:'/user/list',
+					data:JSON.stringify(data),
+					type:'post',
+					dataType:'json',
+					contentType:'application/json',
+					success:function(result){
+						if(result.success){
+							userVm.items = result.resultData
+						}else{
+							alert(result.resultMsg)
+						}
+					},
+					error:function(){
+						alert('网络异常！')
+					}
+				})
+			},
+			createUser:function(){
+				if(!(this.createUser.accountName.trim() && this.createUser.mobile.trim() && this.createUser.gender.trim())){
+					alert('请填写完整必填项!');
+					return;
+				};
+				var data = {
+					'accountName':this.createUser.accountName,
+					'mobile':this.createUser.mobile,
+					'email':this.createUser.email,
+					'gender':this.createUser.gender,
+					'provinceId':this.createUser.selectedProvince.provinceId,
+					'provinceName':this.createUser.selectedProvince.provinceName,
+					'cityId':this.createUser.selectedCity.cityId,
+					'cityName':this.createUser.selectedCity.cityName,
+					'districtId ':this.createUser.selectedDistrict.districtId,
+					'districtName':this.createUser.selectedDistrict.districtName
+				}
+
+
+			},
+			provinceChange:function(){
+				var provinceId = this.createUser.selectedProvince.provinceId;
+				$.ajax({
+					url:'/area/getCityByProvince?provinceId='+ provinceId,
+	                type:'get',
+	                dataType:'json',
+	                contentType:'application/json',
+	                success:function(result){
+	                   if(result.success){
+	                   		userVm.cityList = result.resultData
+	                   }else{
+	                   		alert(result.resultMsg)
+	                   }
+	                },
+	                error:function(){
+	                    alert('网络异常！')
+	                }
+				})
+			},
+			cityChange:function(){
+				var cityId = this.createUser.selectedCity.cityId;
+				$.ajax({
+					url:'/area/getDistrictByCity?cityId='+ cityId,
+	                type:'get',
+	                dataType:'json',
+	                contentType:'application/json',
+	                success:function(result){
+	                   if(result.success){
+	                   		userVm.districtList = result.resultData
+	                   }else{
+	                   		alert(result.resultMsg)
+	                   }
+	                },
+	                error:function(){
+	                    alert('网络异常！')
+	                }
+				})
+			},
+			showCreateModal:function(){
+				$('#createUser').modal({
+					backdrop:'static'
+				})
+			}
+		},
+		filters:{
+			isDeleteFilter:function(value){
+				if(value === 0){
+					return '正常';
+				}else{
+					return '禁用';
+				}
+			}
+
+		},
+		mounted:function(){
+			$.ajax({
+				url:'/area/getProvince',
+                type:'get',
+                dataType:'json',
+                contentType:'application/json',
+                success:function(result){
+                   if(result.success){
+                   		result.resultData.unshift({provinceName:'请选择',provinceId:''})
+                   		userVm.provinceList = result.resultData
+                   }else{
+                   		alert(result.resultMsg)
+                   }
+                },
+                error:function(){
+                    alert('网络异常！')
+                }
+			})
+
+		}
+	})
+	
+</script>
+</html>

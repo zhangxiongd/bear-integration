@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="keywordys" content="人人权限系统, 管理系统">
+    <meta name="description" content="login.html">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     <style type="text/css">
@@ -113,7 +115,6 @@
     </div>
     <div class="login_body">
         <p>管理员登录</p>
-        <form>
             <div class="form_control">
                 <input class="" type="text" placeholder="账号" v-model="account">
                 <span class="glyphicon glyphicon-user form_fonts" aria-hidden="true"></span>
@@ -127,13 +128,12 @@
                 <span class="glyphicon glyphicon-warning-sign form_fonts" aria-hidden="true"></span>
             </div>
             <div class="form_group">
-                <img :src="src">
+                <img :src="src" title="如果看不清请单击图片刷新">
                 <a href="#" @click="refreshCode">点击刷新</a>
             </div>
             <div class="row">
                 <button @click="login">登录</button>
             </div>
-        </form>
     </div>
 </div>
 </body>
@@ -141,10 +141,10 @@
 <script type="text/javascript" src="static/js/vue.js"></script>
 <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    var vue = new Vue({
+    var loginVm = new Vue({
         el: '#loginApp',
         data: {
-            src: '/login/captcha.jpg',
+            src: 'account/captcha.jpg',
             account: '',
             password: '',
             code: ''
@@ -152,28 +152,40 @@
         },
         methods: {
             refreshCode: function () {
-                this.src = '/login/captcha.jpg' + $.now();
+                this.src = 'account/captcha.jpg?t=' + $.now();
+                this.code = '';
+
             },
             login: function () {
-                return
-                var data = {
-                    account: 'this.account',
-                    password: 'this.password',
-                    code: 'this.code'
+                if (this.account.trim() && this.password.trim() && this.code.trim()) {
+                    var data = {
+                        'accountName':this.account,
+                        'password':this.password,
+                        'captcha':this.code
+                    };
+                    $.ajax({
+                        url: 'account/login',
+                        data:JSON.stringify(data),
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        success: function (result) {
+                            if(result.success){
+                                document.location.href = 'index.html'
+                            }else{
+                                loginVm.refreshCode();
+                                alert(result.resultMsg)
+                            }
+
+                        },
+                        error: function () {
+                            loginVm.refreshCode();
+                            alert('网络异常！')
+                        }
+                    })
+                } else {
+                    alert('请填写完整内容！')
                 }
-                $.ajax({
-                    url: '',
-                    data: data,
-                    type: 'post',
-                    dataType: 'json',
-                    contentType: ' application/json',
-                    success: function (result) {
-                        alert('提交成功！')
-                    },
-                    error: function () {
-                        alert('提交失败！')
-                    }
-                })
 
             }
 

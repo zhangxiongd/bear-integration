@@ -43,6 +43,7 @@
         <kaptcha-version>0.0.9</kaptcha-version>
         <velocity-version>1.7</velocity-version>
         <c3p0-version>0.9.1.1</c3p0-version>
+        <version.jackson>2.5.2</version.jackson>
     </properties>
 
     <!-- 阿里云maven仓库 -->
@@ -205,11 +206,27 @@
                 <artifactId>shiro-spring</artifactId>
                 <version>${shiro-version}</version>
             </dependency>
-        
+
             <dependency>
                 <groupId>com.github.axet</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

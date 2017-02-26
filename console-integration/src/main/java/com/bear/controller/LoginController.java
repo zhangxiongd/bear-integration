@@ -1,12 +1,22 @@
 package com.bear.controller;
 
+import com.bear.dto.request.LoginDto;
+import com.bear.enums.ResultCode;
 import com.bear.shiro.ShiroUtils;
+import com.bear.utils.Result;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -19,7 +29,7 @@ import java.awt.image.BufferedImage;
  * Created by zhangxiong on 2017/2/19.
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/account")
 public class LoginController {
     @Resource
     private Producer producer;
@@ -43,5 +53,49 @@ public class LoginController {
             loggr.error("生成图片验证码异常", e);
         }
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Result login(@RequestBody LoginDto loginDto) {
+
+        loggr.info("login loginDto = {}", loginDto);
+
+        String accountName = loginDto.getAccountName();
+        String password = loginDto.getPassword();
+        String captcha = loginDto.getCaptcha();
+
+        if (StringUtils.isBlank(accountName) || StringUtils.isBlank(password) || StringUtils.isBlank(captcha)) {
+            return Result.errorResult(ResultCode.ACCOUNT_PW_BLANK_ERROR);
+        }
+        String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
+        if (!StringUtils.equalsIgnoreCase(captcha, kaptcha)) {
+            loggr.info("验证码错误");
+            return Result.errorResult(ResultCode.CAPTCHA_ERROR);
+        }
+
+        try {
+            Subject subject = ShiroUtils.getSubject();
+            password = new Sha256Hash(password).toHex();
+            UsernamePasswordToken token = new UsernamePasswordToken(accountName, password);
+            subject.login(token);
+        } catch (UnknownAccountException e) {
+            return Result.errorResult(e.getMessage());
+        } catch (IncorrectCredentialsException e) {
+            return Result.errorResult(e.getMessage());
+        } catch (LockedAccountException e) {
+            return Result.errorResult(e.getMessage());
+        } catch (AuthenticationException e) {
+            return Result.errorResult("账户验证失败");
+        }
+        return Result.success();
+    }
+
+    @RequestMapping(value = "/loginOut", method = RequestMethod.GET)
+    @ResponseBody
+    public Result loginOut() {
+        ShiroUtils.logout();
+        return Result.success();
+    }
+
 
 }
