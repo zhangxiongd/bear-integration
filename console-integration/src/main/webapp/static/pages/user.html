@@ -139,14 +139,14 @@
 				mobile:'',
 				email:'',
 				gender:'',
-				selectedProvince:{},
-				selectedCity:{},
-				selectedDistrict:{}
+				selectedProvince:{provinceName:'请选择',provinceId:''},
+				selectedCity:{cityName:'请选择',cityId:''},
+				selectedDistrict:{districtName:'请选择',districtcityId:''}
 
 			},
 			provinceList:[],
-			cityList:[],
-			districtList:[]
+			cityList:[{cityName:'请选择',cityId:''}],
+			districtList:[{districtName:'请选择',districtcityId:''}]
 
 		},
 		methods:{
@@ -178,14 +178,18 @@
 					alert('请填写完整必填项!');
 					return;
 				};
-				// var data = {
-				// 	'accountName':this.createUser.accountName,
-				// 	'mobile':this.createUser.mobile,
-				// 	'email':this.createUser.email,
-				// 	'gender':this.createUser.gender
-				// 	'provinceId':
-				// 	'province'
-				// }
+				var data = {
+					'accountName':this.createUser.accountName,
+					'mobile':this.createUser.mobile,
+					'email':this.createUser.email,
+					'gender':this.createUser.gender,
+					'provinceId':this.createUser.selectedProvince.provinceId,
+					'provinceName':this.createUser.selectedProvince.provinceName,
+					'cityId':this.createUser.selectedCity.cityId,
+					'cityName':this.createUser.selectedCity.cityName,
+					'districtId ':this.createUser.selectedDistrict.districtId,
+					'districtName':this.createUser.selectedDistrict.districtName
+				}
 
 
 			},
@@ -246,6 +250,7 @@
                 contentType:'application/json',
                 success:function(result){
                    if(result.success){
+                   		result.resultData.unshift({provinceName:'请选择',provinceId:''})
                    		userVm.provinceList = result.resultData
                    }else{
                    		alert(result.resultMsg)
