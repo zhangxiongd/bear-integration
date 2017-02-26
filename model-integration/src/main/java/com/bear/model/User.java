@@ -73,10 +73,16 @@ public class User implements Serializable {
      * 创建时间
      */
     private Date createdAt;
+
     /**
      * 修改时间
      */
     private Date updatedAt;
+
+    /**
+     * 是否是系统不管理员 0:不是 1：是
+     */
+    private Integer isAdmin;
     /**
      * 是否禁用 0:正常 1:失效
      */
@@ -200,6 +206,14 @@ public class User implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public Integer getIsDelete() {

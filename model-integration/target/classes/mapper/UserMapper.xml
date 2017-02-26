@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bear.dao.UserMapper">
-    
+
     <resultMap id="BaseResultMap" type="com.bear.model.User">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
@@ -16,11 +16,50 @@
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
         <result column="district_id" property="districtId" jdbcType="BIGINT"/>
         <result column="district_name" property="districtName" jdbcType="VARCHAR"/>
+        <result column="is_admin" property="isAdmin" jdbcType="BIGINT"/>
         <result column="is_delete" property="isDelete" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-       id,account_name,password,real_name,mobile,email,gender,province_id,province_name,city_id,city_name,district_id,district_name,is_delete
+       id,account_name,password,real_name,mobile,email,gender,province_id,province_name,city_id,city_name,district_id,district_name,is_admin,is_delete
    </sql>
 
+
+    <select id="queryByAccountName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from user
+        where account_name = #{accountName}
+    </select>
+
+
+    <select id="modifyPwd" resultMap="BaseResultMap">
+        update user set password = #{newPwd} where id = #{id}
+    </select>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="com.bear.dto.request.ListUserReqDto">
+        SELECT id,account_name,real_name,mobile,email,gender,province_name,city_name,district_name,is_admin,is_delete
+        from user
+        where
+        1 = 1
+        <if test='accountName != null and accountName != "" '>
+            and account_name = #{accountName}
+        </if>
+        <if test='mobile != null and mobile != "" '>
+            and mobile = #{mobile}
+        </if>
+        <!--<if test="realName != null ">-->
+        <!--and real_name = #{realName}-->
+        <!--</if>-->
+
+        <!--<if test="email != null ">-->
+        <!--and email = #{email}-->
+        <!--</if>-->
+        <!--<if test="gender != null ">-->
+        <!--and gender = #{gender}-->
+        <!--</if>-->
+        <!--<if test="isAdmin != null ">-->
+        <!--and is_admin = #{isAdmin}-->
+        <!--</if>-->
+    </select>
 </mapper>
