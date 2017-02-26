@@ -26,7 +26,7 @@
 				<div class="col-sm-8 control-label">
 					<span class="warnMsg" v-if="warnMsg">用户名和手机请必填一项</span>
  					<button type="button" class="btn btn-success " @click="query"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询</button>
-					<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#createUser"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
+					<button type="button" class="btn btn-primary" @click="showCreateModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增</button>
 					<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除</button>
 				</div>
 	        </form>
@@ -229,6 +229,11 @@
 	                error:function(){
 	                    alert('网络异常！')
 	                }
+				})
+			},
+			showCreateModal:function(){
+				$('#createUser').modal({
+					backdrop:'static'
 				})
 			}
 		},
