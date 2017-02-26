@@ -68,14 +68,14 @@
 		            <div class="form-group">
 	                    <label for="" class="col-sm-2 control-label">地址</label>
 		                <div class="col-sm-10">
-	                    	<select>
-	                    		<option v-for="province in provinceList" :value="province.provinceId">{{province.provinceName}}</option>
+	                    	<select v-model="createUser.selectedProvince" @change="provinceChange">
+	                    		<option v-for="item in provinceList" :value="{provinceId:item.provinceId,provinceName:item.provinceName}" >{{item.provinceName}}</option>
 	                    	</select>
-	                    	<select >
-	                    		<option>市名</option>
+	                    	<select v-model="createUser.selectedCity" @change="cityChange">
+	                    		<option v-for="item in cityList" :value="{cityName:item.cityName,cityId:item.cityId}">{{item.cityName}}</option>
 	                    	</select>
-	                    	<select> 
-	                    		<option>区名</option>
+	                    	<select v-model="createUser.selectedDistrict"> 
+	                    		<option v-for="item in districtList" :value="{districtName:item.districtName,districtId:item.districtId}">{{item.districtName}}</option>
 	                    	</select>
 	                    </div>
 		            </div>
@@ -138,10 +138,15 @@
 				accountName:'',
 				mobile:'',
 				email:'',
-				gender:''
+				gender:'',
+				selectedProvince:{},
+				selectedCity:{},
+				selectedDistrict:{}
 
 			},
 			provinceList:[],
+			cityList:[],
+			districtList:[]
 
 		},
 		methods:{
@@ -179,9 +184,48 @@
 				// 	'email':this.createUser.email,
 				// 	'gender':this.createUser.gender
 				// 	'provinceId':
+				// 	'province'
 				// }
 
 
+			},
+			provinceChange:function(){
+				var provinceId = this.createUser.selectedProvince.provinceId;
+				$.ajax({
+					url:'/area/getCityByProvince?provinceId='+ provinceId,
+	                type:'get',
+	                dataType:'json',
+	                contentType:'application/json',
+	                success:function(result){
+	                   if(result.success){
+	                   		userVm.cityList = result.resultData
+	                   }else{
+	                   		alert(result.resultMsg)
+	                   }
+	                },
+	                error:function(){
+	                    alert('网络异常！')
+	                }
+				})
+			},
+			cityChange:function(){
+				var cityId = this.createUser.selectedCity.cityId;
+				$.ajax({
+					url:'/area/getDistrictByCity?cityId='+ cityId,
+	                type:'get',
+	                dataType:'json',
+	                contentType:'application/json',
+	                success:function(result){
+	                   if(result.success){
+	                   		userVm.districtList = result.resultData
+	                   }else{
+	                   		alert(result.resultMsg)
+	                   }
+	                },
+	                error:function(){
+	                    alert('网络异常！')
+	                }
+				})
 			}
 		},
 		filters:{
@@ -211,6 +255,7 @@
                     alert('网络异常！')
                 }
 			})
+
 		}
 	})
 	
