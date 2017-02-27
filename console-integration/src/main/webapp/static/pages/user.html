@@ -137,7 +137,7 @@
 			items:[],
 			createUser:{
 				accountName:'',
-				mobile:'',
+				mobile:'',  
 				email:'',
 				gender:'',
 				selectedProvince:{provinceName:'请选择',provinceId:''},
@@ -145,7 +145,7 @@
 				selectedDistrict:{districtName:'请选择',districtcityId:''}
 
 			},
-			provinceList:[],
+			provinceList:[{provinceName:'请选择',provinceId:''}],
 			cityList:[{cityName:'请选择',cityId:''}],
 			districtList:[{districtName:'请选择',districtcityId:''}]
 
@@ -286,7 +286,7 @@
                 contentType:'application/json',
                 success:function(result){
                    if(result.success){
-                   		result.resultData.unshift({provinceName:'请选择',provinceId:''})
+                   		// result.resultData.unshift({provinceName:'请选择',provinceId:''})
                    		userVm.provinceList = result.resultData
                    }else{
                    		alert(result.resultMsg)

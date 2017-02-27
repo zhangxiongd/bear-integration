@@ -125,7 +125,7 @@
                 <span class="glyphicon glyphicon-lock form_fonts" aria-hidden="true"></span>
             </div>
             <div class="form_control">
-                <input type="text" placeholder="验证码" v-model="code">
+                <input type="text" placeholder="验证码" v-model="code" @keyup="jumpPage">
                 <span class="glyphicon glyphicon-warning-sign form_fonts" aria-hidden="true"></span>
             </div>
             <div class="form_group">
@@ -156,6 +156,12 @@
                 this.src = 'account/captcha.jpg?t=' + $.now();
                 this.code = '';
 
+            },
+            jumpPage:function(event){
+                if(event.keyCode == '13'){
+                     this.login();
+                };
+               
             },
             login: function () {
                 if (this.account.trim() && this.password.trim() && this.code.trim()) {
