@@ -15,6 +15,8 @@
         <module>model-integration</module>
         <module>common-integration</module>
         <module>webApi-integration</module>
+        <module>service-integration</module>
+        <module>service-integration</module>
     </modules>
     <properties>
         <java-version>1.8</java-version>
@@ -227,6 +229,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${version.jackson}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.5.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
