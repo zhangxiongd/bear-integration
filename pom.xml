@@ -11,11 +11,9 @@
     <modules>
         <module>console-integration</module>
         <module>api-integration</module>
-        <module>service-integration</module>
         <module>model-integration</module>
         <module>common-integration</module>
         <module>webApi-integration</module>
-        <module>service-integration</module>
         <module>service-integration</module>
     </modules>
     <properties>
@@ -235,6 +233,18 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>2.5.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.101tec</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>0.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
