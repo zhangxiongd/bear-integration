@@ -5,7 +5,7 @@ import com.bear.dto.request.ListUserReqDto;
 import com.bear.enums.ResultCode;
 import com.bear.manager.UserManager;
 import com.bear.model.User;
-import com.bear.service.UserService;
+import service.UserService;
 import com.bear.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

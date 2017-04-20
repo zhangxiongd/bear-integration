@@ -1,0 +1,17 @@
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\manager\AreaManager.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dto\request\LoginDto.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dao\DistrictMapper.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\manager\impl\AreaManagerimpl.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dto\response\UserInfoRespDto.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dto\request\ListUserReqDto.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dao\UserMapper.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dto\request\CreateUserReqDto.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\model\City.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\manager\UserManager.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\manager\impl\UserManagerImpl.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dao\ProvinceMapper.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\model\User.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dto\request\ModifyPwdDto.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\model\District.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\dao\CityMapper.java
+E:\workspace\bear-integration\model-integration\src\main\java\com\bear\model\Province.java

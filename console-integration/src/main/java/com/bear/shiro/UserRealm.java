@@ -1,7 +1,7 @@
 package com.bear.shiro;
 
 import com.bear.model.User;
-import com.bear.service.UserService;
+import service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

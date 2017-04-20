@@ -6,7 +6,7 @@ import com.bear.dto.request.ModifyPwdDto;
 import com.bear.dto.response.UserInfoRespDto;
 import com.bear.enums.ResultCode;
 import com.bear.model.User;
-import com.bear.service.UserService;
+import service.UserService;
 import com.bear.shiro.ShiroUtils;
 import com.bear.utils.Result;
 import org.apache.commons.lang.StringUtils;

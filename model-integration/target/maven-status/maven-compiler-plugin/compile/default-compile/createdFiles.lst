@@ -1,0 +1,17 @@
+com\bear\dto\response\UserInfoRespDto.class
+com\bear\manager\AreaManager.class
+com\bear\manager\impl\AreaManagerimpl.class
+com\bear\dao\CityMapper.class
+com\bear\dao\UserMapper.class
+com\bear\model\City.class
+com\bear\model\User.class
+com\bear\dto\request\LoginDto.class
+com\bear\manager\UserManager.class
+com\bear\dto\request\CreateUserReqDto.class
+com\bear\manager\impl\UserManagerImpl.class
+com\bear\dao\ProvinceMapper.class
+com\bear\model\Province.class
+com\bear\dao\DistrictMapper.class
+com\bear\dto\request\ModifyPwdDto.class
+com\bear\model\District.class
+com\bear\dto\request\ListUserReqDto.class

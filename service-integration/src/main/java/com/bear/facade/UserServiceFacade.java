@@ -1,5 +1,6 @@
 package com.bear.facade;
 
+
 import com.bear.service.UserService;
 
 /**
